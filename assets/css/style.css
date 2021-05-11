@@ -1,0 +1,139 @@
+/* Chat Styling */
+
+body{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    color: #f3f3f3;
+}
+
+a{
+    color: #fff !important;
+}
+
+.top-caption{
+    position: fixed;
+    height: 50px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+}
+
+.contacts{
+    height: calc(100vh - 50px);
+    padding: 25px;
+    background-color: #555;
+    box-shadow: 0 0 6px 0 rgba(0,0,0, .4);
+}
+
+.avatar{
+    margin: 25px 0;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 5px #fff !important;
+}
+
+.contacts span{
+    display: block;
+    min-width: 100%;
+    padding-left: 25px !important;
+}
+
+.chat-box{
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    box-shadow: 0 0 5px 2px rgba(0,0,0, .4);
+}
+
+.chat-line::-webkit-scrollbar {
+    width: 9px; 
+ }
+
+.chat-line::-webkit-scrollbar-track {
+  background-color: #f4f4f4;
+}
+
+.chat-line::-webkit-scrollbar-thumb {
+  background: #333;
+}
+
+textarea{
+    border-radius: 0 !important;
+}
+
+.chat-section{
+    position: relative;
+    height: calc(100vh - 50px);
+}
+
+.chat-line{
+    overflow-y: auto !important;
+}
+
+.chat-actions a{
+    display: block;
+    line-height: 45px;
+    color: #333 !important;
+}
+
+.message-bubble{
+    width: 45%;
+    padding: 15px;
+    box-shadow: 0 0 5px 0 rgba(0,0,0, .4);
+    background-color: #333;
+    color: #fff;
+    border-radius: 9px;
+}
+
+.profile-favicon{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+/* Modals */
+
+.modal{
+    color: #333 !important;
+}
+
+.blocked::after{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 25vh;
+    line-height: 1rem;
+    font-size: 20px;
+    text-align: center;
+    content: 'Please change your Audio & Video settings to use our App!';
+    background-color: #333;
+    color: #fff;
+}
+
+/*
+#webcam{
+    
+}
+*/
+
+#video-wrapper{
+    position: fixed;
+    top: 2%;
+    left: 2%;
+    background-color: #fff;
+    box-shadow: 0 0 9px 2.5px rgba(0,0,0, .4);
+    cursor: move;
+}
+
+#video-wrapper .buttons{
+    position: absolute;
+    left: 50%;
+    top: 1%;
+    transform: translateX(-50%);
+}
