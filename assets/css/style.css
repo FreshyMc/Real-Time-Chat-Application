@@ -12,16 +12,36 @@ a{
 }
 
 .top-caption{
-    position: fixed;
+    position: relative;
     height: 50px;
     background-color: #333;
     color: #fff;
     text-align: center;
+    z-index: 10;
+}
+
+nav{
+    display: flex;
+    background-color: #666 !important;
+    justify-content: start;
+    align-items: center;
+    padding: 0 25px !important;
+}
+
+nav a{
+    display: block;
+    line-height: 55px;
+    padding: 0 25px;
+    text-decoration: none;
+}
+
+nav a:hover{
+    background-color: #444;
 }
 
 .contacts{
     height: calc(100vh - 50px);
-    padding: 25px;
+    padding: 9px;
     background-color: #555;
     box-shadow: 0 0 6px 0 rgba(0,0,0, .4);
 }
@@ -37,7 +57,6 @@ a{
 .contacts span{
     display: block;
     min-width: 100%;
-    padding-left: 25px !important;
 }
 
 .chat-box{
@@ -67,6 +86,7 @@ textarea{
 
 .chat-section{
     position: relative;
+    padding-top: 50px;
     height: calc(100vh - 50px);
 }
 
@@ -126,9 +146,12 @@ textarea{
     position: fixed;
     top: 2%;
     left: 2%;
+    padding: 0 !important;
+    margin: 0 !important;
     background-color: #fff;
     box-shadow: 0 0 9px 2.5px rgba(0,0,0, .4);
     cursor: move;
+    z-index: 20;
 }
 
 #video-wrapper .buttons{

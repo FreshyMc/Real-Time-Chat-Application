@@ -1,0 +1,24 @@
+(function () {
+    const doc = document;
+    const chatForm = doc.getElementById('chat-form');
+
+    chatForm.addEventListener('submit', async function (ev) {
+        ev.preventDefault();
+
+        let formData = new FormData(ev.target);
+
+        let message = formData.get('message').trim();
+
+        if (!message) {
+            return alert('Write a message before submit of the form!');
+        }
+
+        /* TODO Ajax Request */
+
+        sendMessage(formData);
+    });
+
+    async function sendMessage(formData){
+
+    }
+})();
