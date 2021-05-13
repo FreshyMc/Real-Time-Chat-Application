@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link href="./assets/css/style.css" rel="stylesheet" type="text/css">
+    <!-- Fonts and Icons -->
+    <link href="assets/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Hidden Chat | Talk freely!</title>
+</head>
+
+<body class="container-fluid m-0 p-0 g-0 call">
+    <div class="row g-0 p-0 position-relative" style="height: 100vh !important; overflow: hidden;">
+        <div class="col-12 position-relative">
+            <video id="your-webcam" width="256" height="144" muted></video>
+            <video id="their-webcam" muted></video>
+        </div>
+        <div
+            class="col-12 call-actions position-absolute start-50 bottom-0 translate-middle-x d-flex justify-content-center align-items-center py-2">
+            <button class="btn btn-lg btn-danger m-2">
+                End Call
+            </button>
+            <button class="btn btn-lg btn-primary m-2">Invite</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(async function () {
+            const yourVideo = 'your-webcam';
+            const theirVideo = 'their-webcam';
+            const hdFormat = { width: 1280, height: 720 };
+            const interval = 1000;
+
+            async function getMedia() {
+                try {
+                    return await navigator.mediaDevices.getUserMedia({ audio: true, video: hdFormat });
+                } catch (err) {
+                    console.log(err);
+                    //Block the app in case the user hasn't enabled video and audio
+                    blockApp();
+                }
+            }
+
+            let canvas = document.getElementById(yourVideo);
+            let receiver = document.getElementById(theirVideo);
+
+            let streamHandler = null;
+
+            try {
+                streamHandler = await getMedia();
+
+                streamHandler.getTracks().forEach(function (track) {
+                    console.log(track);
+                });
+
+                canvas.srcObject = streamHandler;
+
+                console.log(canvas.srcObject);
+
+                let videoChunks = [];
+                let recorderOptions = {
+                    mimeType: 'video/webm'
+                };
+
+                let mediaRecorder = new MediaRecorder(streamHandler, recorderOptions);
+
+                mediaRecorder.ondataavailable = async function (data) {
+                    videoChunks.push(data);
+
+                    if (videoChunks.length > 0) {
+                        let blob = await new Blob(videoChunks, {type: 'video/webm'});
+
+                        console.log(blob);
+
+                        let url = URL.createObjectURL(blob);
+
+                        receiver.src = url;
+
+                        URL.revokeObjectURL(url);
+                    }
+                }
+
+                mediaRecorder.start();
+
+                window.setInterval(function () {
+                    mediaRecorder.requestData();
+                }, interval);
+            } catch (err) {
+                console.log(err);
+            }
+
+            canvas.oncanplay = function (ev) {
+                //show in the video element what is being captured by the webcam
+                canvas.play();
+            };
+
+            receiver.oncanplay = function (ev) {
+                console.log(ev);
+
+                receiver.play();
+            }
+
+            function blockApp() {
+                $('.call').attr('class', 'container-fluid m-0 p-0 g-0 call blocked');
+            }
+        });
+    </script>
+</body>
+
+</html>
