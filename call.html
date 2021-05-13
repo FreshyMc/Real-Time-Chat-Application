@@ -74,7 +74,7 @@
 
                 receiver.src = url;
 
-                let sourceBuffer = null;
+                streamVideo(mediaSource);
             } catch (err) {
                 console.log(err);
             }
@@ -92,12 +92,14 @@
                 $('.call').attr('class', 'container-fluid m-0 p-0 g-0 call blocked');
             }
 
-            function streamVideo() {
+            function streamVideo(mediaSource) {
                 let videoChunks = [];
                 let recorderOptions = {
                     mimeType: 'video/webm; codecs=\"opus,vp8\"'
                 };
 
+                let sourceBuffer = null;
+                
                 let mediaRecorder = new MediaRecorder(streamHandler, recorderOptions);
 
                 mediaSource.addEventListener('sourceopen', async function () {
@@ -116,8 +118,14 @@
 
                         if (videoChunks.length > 0) {
                             let blob = await new Blob(videoChunks, { type: 'video/webm; codecs=\"opus,vp8\"' });
+                            
+                            console.log(blob);
 
-                            sourceBuffer.appendBuffer(videoChunks.shift());
+                            //console.log(sourceBuffer);
+
+                            sourceBuffer.appendBuffer(await blob.arrayBuffer());
+
+                            videoChunks.shift();
                         }
                     }
                 });
