@@ -24,7 +24,7 @@
     <div class="row g-0 p-0 position-relative" style="height: 100vh !important; overflow: hidden;">
         <div class="col-12 position-relative">
             <video id="your-webcam" width="256" height="144" muted></video>
-            <video id="their-webcam" muted></video>
+            <video id="their-webcam" muted autoplay></video>
         </div>
         <div
             class="col-12 call-actions position-absolute start-50 bottom-0 translate-middle-x d-flex justify-content-center align-items-center py-2">
@@ -68,36 +68,13 @@
 
                 canvas.srcObject = streamHandler;
 
-                console.log(canvas.srcObject);
+                let mediaSource = new MediaSource();
 
-                let videoChunks = [];
-                let recorderOptions = {
-                    mimeType: 'video/webm'
-                };
+                let url = URL.createObjectURL(mediaSource);
 
-                let mediaRecorder = new MediaRecorder(streamHandler, recorderOptions);
+                receiver.src = url;
 
-                mediaRecorder.ondataavailable = async function (data) {
-                    videoChunks.push(data);
-
-                    if (videoChunks.length > 0) {
-                        let blob = await new Blob(videoChunks, {type: 'video/webm'});
-
-                        console.log(blob);
-
-                        let url = URL.createObjectURL(blob);
-
-                        receiver.src = url;
-
-                        URL.revokeObjectURL(url);
-                    }
-                }
-
-                mediaRecorder.start();
-
-                window.setInterval(function () {
-                    mediaRecorder.requestData();
-                }, interval);
+                let sourceBuffer = null;
             } catch (err) {
                 console.log(err);
             }
@@ -108,13 +85,42 @@
             };
 
             receiver.oncanplay = function (ev) {
-                console.log(ev);
-
                 receiver.play();
-            }
+            };
 
             function blockApp() {
                 $('.call').attr('class', 'container-fluid m-0 p-0 g-0 call blocked');
+            }
+
+            function streamVideo() {
+                let videoChunks = [];
+                let recorderOptions = {
+                    mimeType: 'video/webm; codecs=\"opus,vp8\"'
+                };
+
+                let mediaRecorder = new MediaRecorder(streamHandler, recorderOptions);
+
+                mediaSource.addEventListener('sourceopen', async function () {
+                    // NOTE: Browsers are VERY picky about the codec being EXACTLY
+                    // right here. Make sure you know which codecs you're using!
+                    sourceBuffer = await mediaSource.addSourceBuffer('video/webm; codecs=\"opus,vp8\"');
+
+                    mediaRecorder.start();
+
+                    window.setInterval(function () {
+                        mediaRecorder.requestData();
+                    }, interval);
+
+                    mediaRecorder.ondataavailable = async function (ev) {
+                        videoChunks.push(ev.data);
+
+                        if (videoChunks.length > 0) {
+                            let blob = await new Blob(videoChunks, { type: 'video/webm; codecs=\"opus,vp8\"' });
+
+                            sourceBuffer.appendBuffer(videoChunks.shift());
+                        }
+                    }
+                });
             }
         });
     </script>
