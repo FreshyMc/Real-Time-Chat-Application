@@ -1,0 +1,11 @@
+{"t":1621924007546,"type":1,"username":"Tsvetoslav","message":"Hello world!","time":"5/25/2021 - 9:26:47 AM","token":"@0f55fc43f3bccb37ab5b"}
+{"t":1621924412898,"type":1,"username":"Tsvetoslav","message":"Hello world!","time":"5/25/2021 - 9:33:32 AM","token":"@0f55fc43f3bccb37ab5b"}
+{"t":1621924432138,"type":1,"username":"Tsvetoslav","message":"123123","time":"5/25/2021 - 9:33:52 AM","token":"@0f55fc43f3bccb37ab5b"}
+{"t":1621924491306,"type":1,"username":"Tsvetoslav","message":"123","time":"5/25/2021 - 9:34:51 AM","token":"@0f55fc43f3bccb37ab5b"}
+{"t":1621924506768,"type":1,"username":"Tsvetoslav","message":"1","time":"5/25/2021 - 9:35:06 AM","token":"@0f55fc43f3bccb37ab5b"}
+{"t":1621924661538,"type":1,"username":"Tsvetoslav","message":"1","time":"5/25/2021 - 9:37:41 AM","token":"@0f55fc43f3bccb37ab5b"}
+{"t":1621924672193,"type":1,"username":"Tsvetoslav","message":"2","time":"5/25/2021 - 9:37:52 AM","token":"@0f55fc43f3bccb37ab5b"}
+{"t":1621924865730,"type":1,"username":"Tsvetoslav","message":"1","time":"5/25/2021 - 9:41:05 AM","token":"@0f55fc43f3bccb37ab5b"}
+{"t":1621924870721,"type":1,"username":"Tsvetoslav","message":"23456","time":"5/25/2021 - 9:41:10 AM","token":"@0f55fc43f3bccb37ab5b"}
+{"t":1621925007316,"type":1,"username":"Tsvetoslav","message":"Hello!","time":"5/25/2021 - 9:43:27 AM","token":"@0f55fc43f3bccb37ab5b"}
+{"t":1621925014530,"type":1,"username":"Tsvetoslav","message":"hi!","time":"5/25/2021 - 9:43:34 AM","token":"@0f55fc43f3bccb37ab5b"}

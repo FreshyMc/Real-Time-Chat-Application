@@ -1,0 +1,282 @@
+/* Chat Styling */
+
+:root {
+    --bg-color: #BFE6EC;
+    --bg-secondary: #053542;
+    --bg-primary: #02222B;
+    --accent: #55C34D;
+    --accent-secondary: #8ec14b;
+    --shady: #f2f2f2;
+}
+
+.chat-room {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+}
+
+.left-sidebar {
+    background-color: var(--bg-primary);
+    min-height: 100vh;
+    box-shadow: 0 0 9px 2.5px rgba(0, 0, 0, .15);
+}
+
+.chat-actions-area {
+    width: 100%;
+    height: 60px !important;
+    padding: 0 25px;
+    background-color: var(--bg-secondary);
+    box-shadow: 0 0 9px 2.5px rgba(0, 0, 0, .15);
+    color: #fff !important;
+}
+
+.actions button {
+    color: #fff !important;
+    padding: 10px 15px;
+    font-size: 1.25rem;
+}
+
+.messages-area {
+    position: relative;
+    width: 100%;
+    padding: 15px 0 !important;
+    height: calc(100vh - 160px) !important;
+    overflow-y: auto;
+}
+
+.messages-form {
+    height: 100px !important;
+    padding: 15px;
+    overflow: hidden;
+}
+
+.messages-form textarea {
+    resize: none;
+    padding-right: 117px !important;
+    background-color: #fff;
+}
+
+.actions-btn-group button {
+    width: 45px;
+    height: 45px;
+    background-color: var(--bg-primary);
+    color: #fff !important;
+    margin-right: 9px !important;
+}
+
+.actions-btn-group button:hover {
+    background-color: var(--bg-secondary);
+}
+
+.message-row {
+    width: 100%;
+    height: auto;
+    padding: 15px 25px;
+}
+
+.message {
+    width: 45%;
+    display: inline-block;
+    text-align: left !important;
+    padding-bottom: 15px;
+    flex-direction: column;
+    position: relative;
+    color: #fff;
+    box-shadow: 0 0 9px 1.5px var(--accent);
+    border-radius: 9px;
+}
+
+.message .avatar {
+    position: relative;
+    top: -25px;
+    margin-top: 15px;
+    background-image: linear-gradient(to top, var(--accent), var(--accent-secondary));
+    color: #fff;
+    text-shadow: 0 0 4.5px #222;
+    overflow: hidden;
+    box-shadow: 0 0 9px 1.5px rgba(0, 0, 0, .25);
+}
+
+.message p {
+    margin: 0;
+    margin-top: -15px;
+    padding: 5px 15px;
+    word-wrap: break-word;
+}
+
+.message-timestamp {
+    position: absolute;
+    right: 15px;
+    bottom: -10px;
+    display: inline-block !important;
+    padding: 0 25px;
+    line-height: 20px;
+    font-size: 12px;
+    background-color: var(--accent);
+    color: #111;
+    border-radius: 20px;
+}
+
+.sender {
+    text-align: right;
+}
+
+.sender .message {
+    background-image: linear-gradient(to bottom, #fff, #f2f2f2);
+    color: #333;
+}
+
+.receiver .message {
+    background-image: linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary));
+    color: #fff;
+}
+
+
+/* ScrollBar design */
+
+.messages-area::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* Login Form Design */
+
+.login {
+    background-color: var(--bg-color);
+}
+
+.login-form {
+    width: 40%;
+    height: auto;
+    margin: 25vh auto;
+    padding: 15px;
+    background-color: #fff;
+    border: 1.5px solid rgba(0, 0, 0, .15);
+    border-radius: 9px;
+}
+
+.login-form button[type=submit] {
+    background-color: #333;
+    color: #fff;
+}
+
+
+/* Scroll Btn Design */
+
+#scroll-btn {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin-right: 25px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #55C34D;
+    color: #fff !important;
+    border-radius: 9px;
+    box-shadow: 0 0 9px 2.5px rgba(0, 0, 0, .25);
+}
+
+.file-message {
+    text-align: center;
+    padding: 15px 0;
+}
+
+.view-file {
+    display: inline-block;
+    padding: 0 45px;
+    line-height: 45px;
+    background-image: linear-gradient(to bottom, var(--accent), var(--accent-secondary));
+    color: #fff !important;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 9px;
+    box-shadow: 0 0 9px 1.5px rgba(0, 0, 0, .25);
+    transition: .3s all ease;
+}
+
+.view-file:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 2px 9px 1.5px rgba(0, 0, 0, .25);
+}
+
+
+/* File modal Styling */
+
+.file-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .45);
+    text-align: center;
+    z-index: 20;
+    overflow-y: auto;
+}
+
+.file-modal .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 90% !important;
+    height: auto;
+    transform: translate(-50%, -50%);
+    contain: content;
+}
+
+.file-modal .content video,
+.file-modal .content img {
+    display: none;
+    width: 100% !important;
+    background-color: #333;
+    box-shadow: 0 0 9px 2.5px rgba(0, 0, 0, .25);
+}
+
+.modal-close-btn {
+    position: relative;
+    display: inline-block !important;
+    padding: 0 25px;
+    margin-top: 9px;
+    line-height: 45px;
+    background-color: #fff;
+    z-index: 5;
+}
+
+
+/* Settings Modal Styling */
+
+#settingsModal .modal-content {
+    background-color: var(--bg-primary) !important;
+    color: #fff !important;
+}
+
+#settingsModal .modal-header {
+    border-bottom: 1.5px solid rgba(255, 255, 255, .4) !important;
+}
+
+#settingsModal .modal-header button {
+    color: #fff !important;
+    font-size: 1.8rem;
+}
+
+#settingsModal .modal-footer {
+    border-top: 1.5px solid rgba(255, 255, 255, .35) !important;
+}
+
+#settingsModal button[type=submit] {
+    background-color: var(--accent);
+    color: #fff;
+    transition: .3s ease background-color;
+}
+
+#settingsModal button[type=submit]:hover {
+    background-color: var(--accent-secondary);
+}
+
+@media screen and (max-width: 850px) {
+    .message {
+        width: 70%;
+    }
+}

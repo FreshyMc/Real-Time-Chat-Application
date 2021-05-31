@@ -214,3 +214,263 @@ textarea{
     height: 100% !important;
     background-color: #fff;
 }
+
+/* Chat Styling */
+
+body{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    color: #f3f3f3;
+}
+
+a{
+    color: #fff !important;
+}
+
+.top-caption{
+    position: relative;
+    height: 50px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    z-index: 10;
+}
+
+nav{
+    display: flex;
+    background-color: #666 !important;
+    justify-content: start;
+    align-items: center;
+    padding: 0 25px !important;
+}
+
+nav a{
+    display: block;
+    line-height: 55px;
+    padding: 0 25px;
+    text-decoration: none;
+}
+
+nav a:hover{
+    background-color: #444;
+}
+
+.contacts{
+    height: calc(100vh - 50px);
+    padding: 9px;
+    background-color: #555;
+    box-shadow: 0 0 6px 0 rgba(0,0,0, .4);
+}
+
+.avatar{
+    margin: 25px 0;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 5px #fff !important;
+}
+
+.contacts span{
+    display: block;
+    min-width: 100%;
+}
+
+.chat-box{
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    box-shadow: 0 0 5px 2px rgba(0,0,0, .4);
+}
+
+.chat-line::-webkit-scrollbar {
+    width: 9px; 
+ }
+
+.chat-line::-webkit-scrollbar-track {
+  background-color: #f4f4f4;
+}
+
+.chat-line::-webkit-scrollbar-thumb {
+  background: #333;
+}
+
+textarea{
+    border-radius: 0 !important;
+}
+
+.chat-section{
+    position: relative;
+    padding-top: 50px;
+    height: calc(100vh - 50px);
+}
+
+.chat-line{
+    overflow-y: auto !important;
+}
+
+.chat-actions a{
+    display: block;
+    line-height: 45px;
+    color: #333 !important;
+}
+
+.message-bubble{
+    width: 45%;
+    padding: 15px;
+    box-shadow: 0 0 5px 0 rgba(0,0,0, .4);
+    background-color: #333;
+    color: #fff;
+    border-radius: 9px;
+}
+
+.profile-favicon{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+/* Modals */
+
+.modal{
+    color: #333 !important;
+}
+
+.permission-deny{
+    overflow: hidden;
+}
+
+.deny-msg{
+    display: inline-block;
+    margin: auto;
+    padding: 25px 15px;
+    font-size: 1.5rem;
+    background-color: #F32013;
+    color: #fff;
+    border-radius: 9px;
+    box-shadow: 0 0 15px 2.5px rgba(243, 32, 19, .6);
+}
+
+.permission-deny .modal-deny{
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 25vh;
+    line-height: 1rem;
+    font-size: 20px;
+    text-align: center;
+    content: 'Please change your Audio & Video settings to use our App!';
+    background-color: #333;
+    color: #fff;
+    z-index: 999;
+}
+
+.blocked::after{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 25vh;
+    line-height: 1rem;
+    font-size: 20px;
+    text-align: center;
+    content: 'Please change your Audio & Video settings to use our App!';
+    background-color: #333;
+    color: #fff;
+    z-index: 999;
+}
+
+.repeat-link{
+    display: inline-block;
+    margin: 50px auto;
+    padding: 25px 15px;
+    font-size: 1.5rem;
+    background-color: #2E4BB1;
+    color: #fff;
+    border-radius: 9px;
+    box-shadow: 0 0 15px 2.5px rgba(46, 75, 177, .6);
+}
+
+/*
+#webcam{
+    
+}
+*/
+
+#video-wrapper{
+    position: fixed;
+    top: 2%;
+    left: 2%;
+    padding: 0 !important;
+    margin: 0 !important;
+    background-color: #fff;
+    box-shadow: 0 0 9px 2.5px rgba(0,0,0, .4);
+    cursor: move;
+    z-index: 20;
+}
+
+#video-wrapper .buttons{
+    position: absolute;
+    left: 50%;
+    top: 1%;
+    transform: translateX(-50%);
+}
+
+/* Enter Design */
+
+.chat-enter{
+    background-color: #666;
+}
+
+.enter-form{
+    padding: 2.5rem 5rem;
+    background-color: #333;
+    border-radius: 5px;
+    box-shadow: 0 0 9px 2.5px rgba(0,0,0, .4);
+}
+
+.call{
+    background: #666 linear-gradient(to bottom, #333, #777);
+}
+
+.call-slots{
+}
+
+.call-actions{
+    background: linear-gradient(to top, rgba(0, 0, 0, .35) 45%, transparent);
+}
+
+.user-slot{
+    width: 128px !important;
+    height: 72px !important;
+    margin: 15px;
+    border-radius: 9px;
+    background-color: #777;
+    border: 2.5px solid #fff;
+    box-shadow: 0 0 9px 2.5px rgba(0,0,0, .4);
+}
+
+#your-webcam{
+    position: absolute;
+    top: 2%;
+    left: 2%;
+    background-color: #333;
+    border-radius: 9px;
+    box-shadow: 0 0 9px 2.5px rgba(0,0,0, .4);
+    z-index: 2;
+}
+
+#their-webcam{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: #fff;
+}

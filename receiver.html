@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link href="./assets/css/style.css" rel="stylesheet" type="text/css">
+    <!-- Fonts and Icons -->
+    <link href="assets/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Hidden Chat | Talk freely!</title>
+</head>
+
+<body class="container-fluid m-0 p-0 g-0">
+    <div class="row g-0 p-0 position-relative" style="height: 100vh !important; overflow: hidden;">
+        <div class="chat-form col-4 m-auto">
+            <div class="mb-3">
+                <textarea id="chat-history" class="form-control" style="height: 250px;" disabled></textarea>
+            </div>
+            <form action="#" method="POST" id="chat-form">
+                <div class="mb-3">
+                    <textarea name="message" class="form-control" style="height: 250px;" placeholder="Type your message here..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-lg btn-primary">Send</button>
+            </form>
+        </div>
+    </div>
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js " integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf " crossorigin="anonymous "></script>
+    <script>
+        $(document).ready(async function() {
+            const doc = document;
+            const history = doc.getElementById('chat-history');
+            const host = '127.0.0.1';
+            const port = 8088;
+
+            let username = prompt("Please enter your name:", "Anonymous");
+
+            $('#chat-form').submit(async function(e) {
+                e.preventDefault();
+
+                let form = $(this)[0];
+
+                let formData = new FormData(form);
+
+                let msg = formData.get('message').trim();
+
+                if (msg) {
+                    form.reset();
+
+                    let d = new Date();
+
+                    let timestamp = `${d.toLocaleDateString()} - ${d.toLocaleTimeString()}`;
+
+                    try {
+                        let request = await sendMessage({
+                            t: Date.now(),
+                            type: 1,
+                            username: username,
+                            message: msg,
+                            time: timestamp,
+                        });
+                    } catch (err) {
+                        console.log(err);
+                    }
+                }
+            });
+
+            async function sendMessage(msg) {
+                return new Promise(function(resolve, reject) {
+                    let http = new XMLHttpRequest();
+
+                    http.open('POST', `http://${host}:${port}`, true);
+
+                    http.setRequestHeader("Content-type", "application/json");
+
+                    http.send(JSON.stringify(msg));
+
+                    http.onreadystatechange = function() {
+                        if (this.readyState == 4) {
+                            if (this.status == 200 || this.status == 204) {
+                                resolve(this.responseText);
+                            } else {
+                                reject(this.status, this.readyState);
+                            }
+                        }
+                    }
+                });
+            }
+
+            async function requestMessages() {
+                return new Promise(function(resolve, reject) {
+                    let http = new XMLHttpRequest();
+
+                    http.open('POST', `php/client.php`, true);
+
+                    http.onreadystatechange = function() {
+                        if (this.readyState == 4) {
+                            if (this.status == 200) {
+                                resolve(this.responseText);
+                            } else {
+                                reject(this.response);
+                            }
+                        }
+                    }
+
+                    http.send();
+                });
+            }
+
+            let request = async function() {
+                try {
+                    let msgs = await requestMessages();
+
+                    let response = msgs.split("\r\n");
+
+                    history.value = '';
+
+                    for (let msg of response) {
+                        if (msg) {
+                            let parsed = JSON.parse(msg);
+
+                            history.value += `(${parsed.time}) ${parsed.username}=> ${parsed.message}\n`;
+                        }
+                    }
+
+                    return request();
+                } catch (err) {
+                    console.log(err);
+                }
+            };
+
+            //Trigger
+            request();
+        });
+    </script>
+</body>
+
+</html>
