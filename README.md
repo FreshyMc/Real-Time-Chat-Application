@@ -18,7 +18,6 @@ The platform will support in future:
 # BackEnd
 
 1. PHP7.2
-2. NodeJS
 
 # Contacts
 Feel free to contact me if you want to contribute to this project. I will apreciate it!
